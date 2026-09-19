@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bacster's Dog Park </title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Georgia, "Times New Roman", serif;
+      color: #24212b;
+      background: #9dd3ff;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    main {
+      width: min(100%, 560px);
+      padding: 32px;
+      background: #fffdf9;
+      border: 2px solid #24212b;
+      box-shadow: 8px 8px 0 #d5b8a3;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: clamp(2rem, 7vw, 3.5rem);
+      line-height: 1;
+    }
+
+    label,
+    select,
+    button {
+      font: inherit;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    select,
+    button {
+      padding: 10px 12px;
+      border: 2px solid #24212b;
+      background: #f4efe7;
+    }
+
+    button {
+      cursor: pointer;
+      background: #9ba5fd;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #2f3c8a;
+    }
+
+    #output {
+      margin-top: 24px;
+      padding: 18px;
+      background: #24212b;
+      color: #fffdf9;
+      line-height: 1.6;
+    }
+
+    code {
+      color: #91e0ff;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Bacster's Dog Park</h1>
+    <p>Choose Bacster's mood and let JavaScript build his park message.</p>
+
+    <label for="greeting">Bacster's mood</label>
+    <select id="greeting">
+      <option value="friendly">Ready for pets</option>
+      <option value="professional">Good citizen</option>
+      <option value="excited">Zoomies!</option>
+    </select>
+    <button id="runButton" type="button">Call Bacster</button>
+
+    <div id="output" aria-live="polite">Your message will appear here.</div>
+  </main>
+
+  <script>
+    const dogName = "Bacster"; /// yes I will continue using Bacster because he is good boy and was a spoiled menace in my 3Ds game. why am i saying this here? Lore. nothing more
+    const walkDistance = 4.5;
+    const greetingSelect = document.querySelector("#greeting");
+    const output = document.querySelector("#output");
+
+    function createMessage() {
+      const greetingStyle = greetingSelect.value;
+      let greeting;
+
+      // Switch statement chooses Bacster's park greeting.
+      switch (greetingStyle) {
+        case "professional":
+          greeting = "Good doggy!";
+          break;
+        case "excited":
+          greeting = "Woof";
+          break;
+        default:
+          greeting = "Hi pup";
+      }
+
+      // If statement adds extra excitement for zoomies.
+      if (greetingStyle === "excited") {
+        greeting += "!";
+      } else {
+        greeting += ",";
+      }
+
+      const nameInUppercase = dogName.toUpperCase(); // String method.
+      const formattedDistance = walkDistance.toFixed(1); // Number method.
+      const concatenatedMessage = greeting + " " + nameInUppercase
+        + "! You walked " + formattedDistance + " miles at the dog park.";
+
+      output.innerHTML = concatenatedMessage
+        + "<br><br><code>Concatenated string: " + concatenatedMessage + "</code>";
+      console.log(concatenatedMessage);
+    }
+
+    document.querySelector("#runButton").addEventListener("click", createMessage);
+    createMessage();
+  </script>
+</body>
+</html>
